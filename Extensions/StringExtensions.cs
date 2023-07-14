@@ -1,11 +1,14 @@
-﻿namespace Our.Extensions;
+﻿using System.Collections.Generic;
 
-public static class StringExtensions
+namespace Our.Extensions
 {
-    public static string ReplaceVariables(this string source, Dictionary<string, string> variables)
+    public static class StringExtensions
     {
-        variables.ForEach(variablePair => source = source
-            .Replace($"{{{variablePair.Key}}}", variablePair.Value));
-        return source;
+        public static string ReplaceVariables(this string source, Dictionary<string, string> variables)
+        {
+            variables.ForEach(variablePair => source = source
+                .Replace($"{{{variablePair.Key}}}", variablePair.Value));
+            return source;
+        }
     }
 }
