@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 
 namespace Our.Extensions
 {
@@ -11,6 +13,20 @@ namespace Our.Extensions
             foreach (var element in enumerable)
                 action(element);
         }
+        
+        public static async Task ForEachAsync<T>(this IEnumerable<T> enumerable, Func<T, Task> action)
+        {
+            foreach (var element in enumerable)
+                await action(element);
+        }
+
+#if UNITASK_SUPPORT
+        public static async UniTask ForEachAsync<T>(this IEnumerable<T> enumerable, Func<T, UniTask> action)
+        {
+            foreach (var element in enumerable)
+                await action(element);
+        }
+#endif
 
         public static IEnumerable<T> Except<T>(this IEnumerable<T> enumerable, T except)
         {
