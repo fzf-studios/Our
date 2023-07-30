@@ -19,14 +19,12 @@ namespace Our.Extensions
             foreach (var element in enumerable)
                 await action(element);
         }
-
-#if UNITASK_SUPPORT
+        
         public static async UniTask ForEachAsync<T>(this IEnumerable<T> enumerable, Func<T, UniTask> action)
         {
             foreach (var element in enumerable)
                 await action(element);
         }
-#endif
 
         public static IEnumerable<T> Except<T>(this IEnumerable<T> enumerable, T except)
         {
